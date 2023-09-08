@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <h1>QR Code Generator</h1>
+        <!-- Input teks atau data yang ingin dikonversi menjadi QR code -->
+        <input type="text" id="inputData" autofocus placeholder="Masukkan teks atau data" onkeydown="checkEnter(event)">
+        <br>
+        <button id="generateButton" onclick="generateQRCode()">Generate QR Code</button>
+
+        <!-- Container untuk menampilkan QR code -->
+        <div id="qrcode"></div>
+    </div>
+
+    <script>
+        function generateQRCode() {
+    var inputData = document.getElementById("inputData").value;
+    var qrCodeContainer = document.getElementById("qrcode");
+
+    // Hapus konten QR code sebelumnya jika ada
+    qrCodeContainer.innerHTML = '';
+
+    // Buat elemen QR code menggunakan QRCode.js
+    var qrcode = new QRCode(qrCodeContainer, {
+        text: inputData,
+        width: 128,
+        height: 128
+    });
+}
+
+
+        function checkEnter(event) {
+            if (event.key === "Enter") {
+                generateQRCode();
+                event.preventDefault(); // Mencegah form dari pengiriman (jika ada)
+            }
+        }
+    </script>
+
+    <!-- Sisipkan QRCode.js (versi terbaru) -->
+    <script src="./qrcode.min.js"></script>
+</body>
+</html>
